@@ -8,6 +8,24 @@ database:
   dbName: "anotherworld"
   port: 3306
 
+#Time
+time:
+  year: "year"
+  years: "years"
+  month: "month"
+  months: "months"
+  week: "week"
+  weeks: "weeks"
+  day: "day"
+  days: "days"
+  hour: "hour"
+  hours: "hours"
+  minute: "minute"
+  minutes: "minutes"
+  second: "second"
+  seconds: "seconds"
+  permanently: "permanently"
+
 
 #Errors
 errors:
@@ -31,5 +49,6 @@ banlist:
   banned: "was banned"
   by: "By :"
   reason: "Reason :"
+  time: "How much time :"
   when: "When :"
   expiration: "Expiration :"

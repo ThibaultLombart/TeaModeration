@@ -3,7 +3,9 @@ version: '${project.version}'
 main: fr.thibaultlombart.teamoderation.TeaModeration
 api-version: 1.20
 
-tbanlist:
-  description: "Command to see banned people in a gui"
-  permission: teamoderation.tbanlist
-  aliases: tbl
+commands:
+
+  tbanlist:
+    description: "Command to see banned people in a gui"
+    permission: teamoderation.tbanlist
+    aliases: tbl

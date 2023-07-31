@@ -12,10 +12,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import javax.sound.sampled.Line;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class GuiManager {
 
@@ -60,80 +58,68 @@ public class GuiManager {
                 inv.setItem(48, avant);
             }
             int compteur = 0;
-            if (page == 0) {
-                for (int i = 0; i < banList.length && i < 45; i++) {
-                    // On récupere toutes les infos
+            // Ici on met le début a 0
+            int debutLen = 0;
 
-                    BanEntry bannedPeople = banList[i];
-                    String playerBanned = bannedPeople.getTarget();
-                    String playerWhoBanned = bannedPeople.getSource();
-                    Date dateExpiration = bannedPeople.getExpiration();
-                    Date dateBanned = bannedPeople.getCreated();
-                    String reason = bannedPeople.getReason();
+            // Si la page est > a 0, on change pour mettre 45*page
+            if (page > 0) {
+                debutLen = (45 * page);
+            }
 
-                    ItemStack skull = new ItemStack(Material.LEGACY_SKULL, 1, (short) SkullType.PLAYER.ordinal());
-                    SkullMeta meta = (SkullMeta) Bukkit.getItemFactory().getItemMeta(Material.LEGACY_SKULL);
-                    meta.setOwner(playerBanned);
-                    skull.setItemMeta(meta);
+            for (int i = debutLen; i < banList.length && i < 45; i++) {
+                // On récupere toutes les infos
 
-                    // On rentre les infos
-                    ItemMeta itemMeta = skull.getItemMeta();
-                    List<String> lore = new ArrayList<>();
-                    ;
+                BanEntry bannedPeople = banList[i];
+                String playerBanned = bannedPeople.getTarget();
+                String playerWhoBanned = bannedPeople.getSource();
+                Date dateExpiration = bannedPeople.getExpiration();
+                Date dateBanned = bannedPeople.getCreated();
+                String reason = bannedPeople.getReason();
 
-                    lore.add("§f--------------------");
-                    lore.add("§a" + playerBanned);
-                    lore.add("§a" + Informations.getInformations("banlist.banned"));
-                    lore.add("§9" + Informations.getInformations("banlist.by") + " §f" + playerWhoBanned);
-                    lore.add("§9" + Informations.getInformations("banlist.reason") + " §f" + reason);
-                    lore.add("§9" + Informations.getInformations("banlist.when") + " §f" + dateBanned);
-                    lore.add("§9" + Informations.getInformations("banlist.expiration") + " §f" + dateExpiration);
-                    lore.add("§f--------------------");
-                    itemMeta.setLore(lore);
-                    skull.setItemMeta(itemMeta);
+                String time = Informations.getInformations("time.permanently");
 
-                    inv.setItem(compteur, skull);
-                    compteur++;
+                if(dateExpiration != null){
+                    time = Informations.getTime(dateBanned,dateExpiration);
 
                 }
-            } else {
-                for (int i = (45 * page); i < banList.length && i < (45 * page) + 45; i++) {
-                    // On récupere toutes les infos
-                    BanEntry bannedPeople = banList[i];
-                    String playerBanned = bannedPeople.getTarget();
-                    String playerWhoBanned = bannedPeople.getSource();
-                    Date dateExpiration = bannedPeople.getExpiration();
-                    Date dateBanned = bannedPeople.getCreated();
-                    String reason = bannedPeople.getReason();
 
-                    ItemStack skull = new ItemStack(Material.LEGACY_SKULL, 1, (short) SkullType.PLAYER.ordinal());
-                    SkullMeta meta = (SkullMeta) Bukkit.getItemFactory().getItemMeta(Material.LEGACY_SKULL);
-                    meta.setOwner(playerBanned);
-                    skull.setItemMeta(meta);
 
-                    // On rentre les infos
-                    ItemMeta itemMeta = skull.getItemMeta();
-                    List<String> lore = new ArrayList<>();
-                    ;
+                boolean isNewVersion = Arrays.stream(Material.values()).map(Material::name).collect(Collectors.toList()).contains("PLAYER_HEAD");
 
-                    lore.add("§f--------------------");
-                    lore.add("§a" + playerBanned);
-                    lore.add("§a" + Informations.getInformations("banlist.banned"));
-                    lore.add("§9" + Informations.getInformations("banlist.by") + " §f" + playerWhoBanned);
-                    lore.add("§9" + Informations.getInformations("banlist.reason") + " §f" + reason);
-                    lore.add("§9" + Informations.getInformations("banlist.when") + " §f" + dateBanned);
-                    lore.add("§9" + Informations.getInformations("banlist.expiration") + " §f" + dateExpiration);
-                    lore.add("§f--------------------");
-                    itemMeta.setLore(lore);
-                    skull.setItemMeta(itemMeta);
+                Material type = Material.matchMaterial(isNewVersion ? "PLAYER_HEAD" : "SKULL_ITEM");
 
-                    inv.setItem(compteur, skull);
-                    compteur++;
-                }
+                ItemStack skull = new ItemStack(type, 1);
+                SkullMeta meta = (SkullMeta) skull.getItemMeta();
+                meta.setOwner(playerBanned);
+                skull.setItemMeta(meta);
+
+                // On rentre les infos
+                ItemMeta itemMeta = skull.getItemMeta();
+                List<String> lore = new ArrayList<>();
+
+
+                lore.add("§f--------------------");
+                lore.add("§a" + playerBanned);
+                lore.add("§a" + Informations.getInformations("banlist.banned"));
+                lore.add("§9" + Informations.getInformations("banlist.by") + " §f" + playerWhoBanned);
+                lore.add("§9" + Informations.getInformations("banlist.reason") + " §f" + reason);
+                lore.add("§9" + Informations.getInformations("banlist.time") + " §f" + time);
+                lore.add("§9" + Informations.getInformations("banlist.when") + " §f" + dateBanned);
+                lore.add("§9" + Informations.getInformations("banlist.expiration") + " §f" + dateExpiration);
+                lore.add("§f--------------------");
+                itemMeta.setLore(lore);
+                skull.setItemMeta(itemMeta);
+
+                inv.setItem(compteur, skull);
+                compteur++;
+
             }
 
 
+
         }
+
+        player.openInventory(inv);
 
     }
 }
