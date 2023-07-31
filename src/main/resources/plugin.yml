@@ -1,0 +1,4 @@
+name: TeaModeration
+version: '${project.version}'
+main: fr.thibaultlombart.teamoderation.TeaModeration
+api-version: 1.20
