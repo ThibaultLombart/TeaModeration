@@ -30,7 +30,7 @@ public class GuiManager {
         // Ici on met donc le tournesol avec la page
         ItemStack tournesol = new ItemStack(Material.SUNFLOWER, 1);
         ItemMeta customTournesol = tournesol.getItemMeta();
-        customTournesol.setDisplayName("§fPage " + page);
+        customTournesol.setDisplayName("§f"+Informations.getInformations("page.page")+" " + page);
         tournesol.setItemMeta(customTournesol);
 
         // On l'ajoute a l'inventaire
@@ -41,7 +41,7 @@ public class GuiManager {
             if (banList.length > 45 + 45 * page) {
                 ItemStack prochain = new ItemStack(Material.PAPER, 1);
                 ItemMeta customProchain = prochain.getItemMeta();
-                customProchain.setDisplayName("§fProchaine Page");
+                customProchain.setDisplayName("§f"+ Informations.getInformations("page.next"));
                 prochain.setItemMeta(customProchain);
 
                 // On l'ajoute a l'inventaire
@@ -51,7 +51,7 @@ public class GuiManager {
             if (page >= 1) {
                 ItemStack avant = new ItemStack(Material.PAPER, 1);
                 ItemMeta customAvant = avant.getItemMeta();
-                customAvant.setDisplayName("§fPrecedente Page");
+                customAvant.setDisplayName("§f"+ Informations.getInformations("page.previous"));
                 avant.setItemMeta(customAvant);
 
                 // On l'ajoute a l'inventaire
@@ -121,5 +121,28 @@ public class GuiManager {
 
         player.openInventory(inv);
 
+    }
+
+    public static void createPardon(Player player, ItemStack skull) {
+        // On crée ici l'interface pour la banList
+        Inventory inv = Bukkit.createInventory(null, 9, "§fPardon");
+
+        inv.setItem(4,skull);
+
+        ItemStack pardon = new ItemStack(Material.GREEN_WOOL, 1);
+        ItemMeta customPardon = pardon.getItemMeta();
+        customPardon.setDisplayName("§f"+Informations.getInformations("pardon.unban"));
+        pardon.setItemMeta(customPardon);
+
+        inv.setItem(6,pardon);
+
+        ItemStack notPardon = new ItemStack(Material.RED_WOOL, 1);
+        ItemMeta customNotPardon = notPardon.getItemMeta();
+        customNotPardon.setDisplayName("§f"+Informations.getInformations("pardon.cancel"));
+        notPardon.setItemMeta(customNotPardon);
+
+        inv.setItem(2,notPardon);
+
+        player.openInventory(inv);
     }
 }

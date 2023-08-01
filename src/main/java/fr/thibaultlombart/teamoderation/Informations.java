@@ -1,8 +1,16 @@
 package fr.thibaultlombart.teamoderation;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitScheduler;
 
+import java.text.MessageFormat;
 import java.util.Date;
+
+import static org.bukkit.Bukkit.getServer;
 
 public class Informations {
 
@@ -43,6 +51,10 @@ public class Informations {
         return fileConfig.getString(message);
     }
 
+    public static int getInformationsInt(String message){
+        return fileConfig.getInt(message);
+    }
+
 
     public static String getTime(Date dateBanned,Date dateExpiration){
         String time = "";
@@ -63,53 +75,70 @@ public class Informations {
 
         if(years > 0){
             if(years > 1){
-                time += years + " " + Informations.getInformations("time.years");
+                time += " " + years + " " + Informations.getInformations("time.years");
             } else {
-                time += years + " " + Informations.getInformations("time.year");
+                time += " " + years + " " + Informations.getInformations("time.year");
             }
         }
 
         if(months > 0){
             if(months > 1){
-                time += months + " " + Informations.getInformations("time.months");
+                time += " " + months + " " + Informations.getInformations("time.months");
             } else {
-                time += months + " " + Informations.getInformations("time.month");
+                time += " " + months + " " + Informations.getInformations("time.month");
             }
         }
 
         if(days > 0){
             if(days > 1){
-                time += days + " " + Informations.getInformations("time.days");
+                time += " " + days + " " + Informations.getInformations("time.days");
             } else {
-                time += days + " " + Informations.getInformations("time.day");
+                time += " " + days + " " + Informations.getInformations("time.day");
             }
         }
 
         if(hours > 0){
             if(hours > 1){
-                time += hours + " " + Informations.getInformations("time.hours");
+                time += " " + hours + " " + Informations.getInformations("time.hours");
             } else {
-                time += hours + " " + Informations.getInformations("time.hour");
+                time += " " + hours + " " + Informations.getInformations("time.hour");
             }
         }
 
         if(minutes > 0){
             if(minutes > 1){
-                time += minutes + " " + Informations.getInformations("time.minutes");
+                time += " " + minutes + " " + Informations.getInformations("time.minutes");
             } else {
-                time += minutes + " " + Informations.getInformations("time.minute");
+                time += " " + minutes + " " + Informations.getInformations("time.minute");
             }
         }
 
         if(seconds > 0){
             if(seconds > 1){
-                time += seconds + " " + Informations.getInformations("time.seconds");
+                time += " " + seconds + " " + Informations.getInformations("time.seconds");
             } else {
-                time += seconds + " " + Informations.getInformations("time.second");
+                time += " " + seconds + " " + Informations.getInformations("time.second");
             }
         }
 
         return time;
+    }
+
+    public static void noPermission(ItemStack itemStack, Inventory inv, int i, String permission){
+        ItemStack noPerm = new ItemStack(Material.REDSTONE_BLOCK, 1);
+        ItemMeta customNoPerm = noPerm.getItemMeta();
+        customNoPerm.setDisplayName("§c"+ MessageFormat.format(Informations.getInformations("errors.permission").replaceAll("'", "''"),permission));
+        noPerm.setItemMeta(customNoPerm);
+
+        inv.setItem(i,noPerm);
+        BukkitScheduler scheduler = getServer().getScheduler();
+        scheduler.runTaskLater(main, new Runnable() {
+            @Override
+            public void run() {
+                inv.setItem(i,itemStack);
+            }
+        }, 60L);
+
     }
 
 
