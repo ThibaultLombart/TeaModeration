@@ -18,13 +18,13 @@ public final class TeaModeration extends JavaPlugin {
         instance = this;
 
         saveDefaultConfig();
-        Informations.init(getConfig());
+
+        Informations.init(getConfig(),this);
 
         getCommand("tbanlist").setExecutor(new CommandTbanlist());
         getServer().getPluginManager().registerEvents(new ListenersTbanlist(), this);
 
         databaseManager = new DatabaseManager();
-        Informations.initMain(this);
 
 
 

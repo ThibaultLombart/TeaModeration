@@ -25,12 +25,12 @@ public class ListenersTbanlist implements Listener {
                 Player player = (Player) event.getWhoClicked();
                 Inventory inv = event.getClickedInventory();
                 BanEntry[] banList = Bukkit.getBanList(BanList.Type.NAME).getBanEntries().toArray(new BanEntry[0]);
-                if(itemClicked.getItemMeta().getDisplayName().equals("§f"+ Informations.getInformations("page.next"))){
+                if(itemClicked.getItemMeta().getDisplayName().equals("§f"+ Informations.getLangInfos("page.next"))){
                     String page = inv.getItem(49).getItemMeta().getDisplayName();
                     String[] str = page.split(" ");
                     int nbPage = Integer.parseInt(str[1]);
                     GuiManager.createBanList(player,nbPage+1,banList);
-                } else if(itemClicked.getItemMeta().getDisplayName().equals("§f"+ Informations.getInformations("page.previous"))){
+                } else if(itemClicked.getItemMeta().getDisplayName().equals("§f"+ Informations.getLangInfos("page.previous"))){
                     String page = inv.getItem(49).getItemMeta().getDisplayName();
                     String[] str = page.split(" ");
                     int nbPage = Integer.parseInt(str[1]);
@@ -50,9 +50,8 @@ public class ListenersTbanlist implements Listener {
                 ItemStack itemClicked = event.getCurrentItem();
                 Player player = (Player) event.getWhoClicked();
                 Inventory inv = event.getClickedInventory();
-                if(itemClicked.getItemMeta().getDisplayName().equals("§f"+Informations.getInformations("pardon.unban"))){
+                if(itemClicked.getItemMeta().getDisplayName().equals("§f"+Informations.getLangInfos("pardon.unban"))){
                     if(player.hasPermission("minecraft.command.pardon")){
-                        player.sendMessage(String.valueOf(player.hasPermission("minecraft.command.pardon")));
                         SkullMeta skullMeta = (SkullMeta) inv.getItem(4).getItemMeta();
                         String namedBan = skullMeta.getOwner();
 
@@ -64,7 +63,7 @@ public class ListenersTbanlist implements Listener {
 
 
                         Bukkit.getBanList(BanList.Type.NAME).pardon(namedBan);
-                        player.sendMessage("§f"+ MessageFormat.format(Informations.getInformations("pardon.message"),namedBan));
+                        player.sendMessage("§f"+ MessageFormat.format(Informations.getLangInfos("pardon.message"),namedBan));
 
                         Date date = new Date();
 
@@ -74,7 +73,7 @@ public class ListenersTbanlist implements Listener {
                     } else {
                         Informations.noPermission(itemClicked,inv,6,"minecraft.command.pardon");
                     }
-                } else if(itemClicked.getItemMeta().getDisplayName().equals("§f"+Informations.getInformations("pardon.cancel"))){
+                } else if(itemClicked.getItemMeta().getDisplayName().equals("§f"+Informations.getLangInfos("pardon.cancel"))){
                     player.closeInventory();
                 }
             }

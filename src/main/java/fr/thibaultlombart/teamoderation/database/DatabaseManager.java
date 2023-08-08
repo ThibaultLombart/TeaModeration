@@ -12,7 +12,7 @@ public class DatabaseManager {
     private final DbConnection dbConnection;
 
     public DatabaseManager(){
-        this.dbConnection = new DbConnection(new DbCredentials(Informations.getInformations("database.host"), Informations.getInformations("database.user"), Informations.getInformations("database.password"), Informations.getInformations("database.dbName"), Informations.getInformationsInt("database.port")));
+        this.dbConnection = new DbConnection(new DbCredentials(Informations.getParameters("database.host"), Informations.getParameters("database.user"), Informations.getParameters("database.password"), Informations.getParameters("database.dbName"), Informations.getParametersInt("database.port")));
         checkExistingTables();
         DatabaseController.init();
     }

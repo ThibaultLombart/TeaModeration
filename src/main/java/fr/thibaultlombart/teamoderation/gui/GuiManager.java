@@ -30,7 +30,7 @@ public class GuiManager {
         // Ici on met donc le tournesol avec la page
         ItemStack tournesol = new ItemStack(Material.SUNFLOWER, 1);
         ItemMeta customTournesol = tournesol.getItemMeta();
-        customTournesol.setDisplayName("§f"+Informations.getInformations("page.page")+" " + page);
+        customTournesol.setDisplayName("§f"+Informations.getLangInfos("page.page")+" " + page);
         tournesol.setItemMeta(customTournesol);
 
         // On l'ajoute a l'inventaire
@@ -41,7 +41,7 @@ public class GuiManager {
             if (banList.length > 45 + 45 * page) {
                 ItemStack prochain = new ItemStack(Material.PAPER, 1);
                 ItemMeta customProchain = prochain.getItemMeta();
-                customProchain.setDisplayName("§f"+ Informations.getInformations("page.next"));
+                customProchain.setDisplayName("§f"+ Informations.getLangInfos("page.next"));
                 prochain.setItemMeta(customProchain);
 
                 // On l'ajoute a l'inventaire
@@ -51,7 +51,7 @@ public class GuiManager {
             if (page >= 1) {
                 ItemStack avant = new ItemStack(Material.PAPER, 1);
                 ItemMeta customAvant = avant.getItemMeta();
-                customAvant.setDisplayName("§f"+ Informations.getInformations("page.previous"));
+                customAvant.setDisplayName("§f"+ Informations.getLangInfos("page.previous"));
                 avant.setItemMeta(customAvant);
 
                 // On l'ajoute a l'inventaire
@@ -76,7 +76,7 @@ public class GuiManager {
                 Date dateBanned = bannedPeople.getCreated();
                 String reason = bannedPeople.getReason();
 
-                String time = Informations.getInformations("time.permanently");
+                String time = Informations.getLangInfos("time.permanently");
 
                 if(dateExpiration != null){
                     time = Informations.getTime(dateBanned,dateExpiration);
@@ -100,12 +100,12 @@ public class GuiManager {
 
                 lore.add("§f--------------------");
                 lore.add("§a" + playerBanned);
-                lore.add("§a" + Informations.getInformations("banlist.banned"));
-                lore.add("§9" + Informations.getInformations("banlist.by") + " §f" + playerWhoBanned);
-                lore.add("§9" + Informations.getInformations("banlist.reason") + " §f" + reason);
-                lore.add("§9" + Informations.getInformations("banlist.time") + " §f" + time);
-                lore.add("§9" + Informations.getInformations("banlist.when") + " §f" + dateBanned);
-                lore.add("§9" + Informations.getInformations("banlist.expiration") + " §f" + dateExpiration);
+                lore.add("§a" + Informations.getLangInfos("banlist.banned"));
+                lore.add("§9" + Informations.getLangInfos("banlist.by") + " §f" + playerWhoBanned);
+                lore.add("§9" + Informations.getLangInfos("banlist.reason") + " §f" + reason);
+                lore.add("§9" + Informations.getLangInfos("banlist.time") + " §f" + time);
+                lore.add("§9" + Informations.getLangInfos("banlist.when") + " §f" + dateBanned);
+                lore.add("§9" + Informations.getLangInfos("banlist.expiration") + " §f" + dateExpiration);
                 lore.add("§f--------------------");
                 itemMeta.setLore(lore);
                 skull.setItemMeta(itemMeta);
@@ -131,14 +131,14 @@ public class GuiManager {
 
         ItemStack pardon = new ItemStack(Material.GREEN_WOOL, 1);
         ItemMeta customPardon = pardon.getItemMeta();
-        customPardon.setDisplayName("§f"+Informations.getInformations("pardon.unban"));
+        customPardon.setDisplayName("§f"+Informations.getLangInfos("pardon.unban"));
         pardon.setItemMeta(customPardon);
 
         inv.setItem(6,pardon);
 
         ItemStack notPardon = new ItemStack(Material.RED_WOOL, 1);
         ItemMeta customNotPardon = notPardon.getItemMeta();
-        customNotPardon.setDisplayName("§f"+Informations.getInformations("pardon.cancel"));
+        customNotPardon.setDisplayName("§f"+Informations.getLangInfos("pardon.cancel"));
         notPardon.setItemMeta(customNotPardon);
 
         inv.setItem(2,notPardon);

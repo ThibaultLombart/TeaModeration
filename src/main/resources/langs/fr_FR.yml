@@ -1,0 +1,70 @@
+
+#Time
+time:
+  year: "an"
+  years: "ans"
+  month: "mois"
+  months: "mois"
+  week: "semaine"
+  weeks: "semaines"
+  day: "jour"
+  days: "jours"
+  hour: "heure"
+  hours: "heures"
+  minute: "minute"
+  minutes: "minutes"
+  second: "seconde"
+  seconds: "secondes"
+  permanently: "de manière permanente"
+
+#For all guis
+page:
+  page: "Page"
+  next: "Prochaine page"
+  previous: "Page précédente"
+
+#In pardon Gui (when click on people ban in /tbanlist gui)
+pardon:
+  unban: "Débannir"
+  cancel: "Annuler"
+  message: "{0} a été débanni."
+
+
+#Errors
+errors:
+  basic: "Vous ne pouvez pas utiliser cette commande, veuillez suivre ce Schema : "
+  permission: "Vous n'avez pas la permission : {0}"
+
+#Schemas
+schema:
+  tbanlist: "/tbanlist"
+  tban: "/tban <joueur>"
+  tmute: "/tmute <joueur>"
+  tkick: "/tkick <joueur>"
+
+#Message when you are mute
+mute:
+  by: "Vous avez été mute par {0}"
+  reason: "Raison : {0}"
+  time: "pendant {0}" #Example: for 6 days
+
+#Message when you are ban
+ban:
+  by: "Vous avez été banni par {0}"
+  reason: "Raison : {0}"
+  time-1: "Votre ban va s'arreter le {0} a {1}"
+  time-2: "pendant {0}" #Example: for 6 days
+
+#Message when you are kick
+kick:
+  by: "Vous avez été kick par {0}"
+  reason: "Raison : {0}"
+
+#Informations in banlist
+banlist:
+  banned: "a été banni"
+  by: "par :"
+  reason: "Raison :"
+  time: "Combien de temps :"
+  when: "Quand :"
+  expiration: "Expiration :"
